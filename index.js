@@ -11,10 +11,11 @@ function myParseInt(numStr, radix = 10) {
     sign = -1;
     numStrNormilized = numStrNormilized.slice(1);
   }
+
   if (numStrNormilized == "") {
     return NaN;
   }
-
+  let atLeastWasOneGoodDigit = false;
   for (let i = 0; i < numStrNormilized.length; i++) {
     let char = numStrNormilized[i];
     let digit;
@@ -28,8 +29,13 @@ function myParseInt(numStr, radix = 10) {
     if (digit >= radix) {
       break;
     }
+    atLeastWasOneGoodDigit = true;
     result = result * radix + digit;
   }
+  if (!atLeastWasOneGoodDigit) {
+    result = NaN;
+  }
+
   return result * sign;
 }
 
